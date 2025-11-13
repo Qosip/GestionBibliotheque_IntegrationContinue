@@ -75,4 +75,58 @@ public class BorrowingServiceTests
             service.TryBorrow(user, copy, borrowedAt, dueDate);
         });
     }
+
+    [Fact]
+    public void Successful_borrow_creates_loan_with_correct_data()
+    {
+        // Arrange
+        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 0, amountDue: 0m);
+
+        var bookId = Guid.NewGuid();
+        var siteId = Guid.NewGuid();
+        var copy = new BookCopy(bookId, siteId);
+
+        var borrowedAt = new DateTime(2025, 1, 1);
+        var dueDate = new DateTime(2025, 1, 15);
+
+        var service = new BorrowingService();
+
+        // Act
+        var result = service.TryBorrow(user, copy, borrowedAt, dueDate);
+
+        // Assert
+        Assert.True(result.Success);
+        Assert.Null(result.ErrorCode);
+
+        Assert.NotNull(result.Loan);
+        Assert.Equal(user.Id, result.Loan!.UserAccountId);
+        Assert.Equal(copy.Id, result.Loan.BookCopyId);
+        Assert.Equal(borrowedAt, result.Loan.BorrowedAt);
+        Assert.Equal(dueDate, result.Loan.DueDate);
+    }
+
+    [Fact]
+    public void Failed_borrow_does_not_create_loan()
+    {
+        // Arrange
+        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 5, amountDue: 0m);
+
+        var bookId = Guid.NewGuid();
+        var siteId = Guid.NewGuid();
+        var copy = new BookCopy(bookId, siteId);
+
+        var borrowedAt = new DateTime(2025, 1, 1);
+        var dueDate = new DateTime(2025, 1, 15);
+
+        var service = new BorrowingService();
+
+        // Act
+        var result = service.TryBorrow(user, copy, borrowedAt, dueDate);
+
+        // Assert
+        Assert.False(result.Success);
+        Assert.Equal("BORROW_LIMIT_REACHED", result.ErrorCode);
+        Assert.Null(result.Loan);
+    }
+
 }

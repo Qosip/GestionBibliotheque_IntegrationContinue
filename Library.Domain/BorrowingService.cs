@@ -26,11 +26,13 @@ public class BorrowingService
             throw new ArgumentException("Due date cannot be before borrowed date.", nameof(dueDate));
         }
 
-        // Règle validée : on effectue l’emprunt
+        // Création du Loan métier
+        var loan = new Loan(user.Id, copy.Id, borrowedAt, dueDate);
+
+        // Mise à jour des états
         copy.MarkAsBorrowed();
         user.IncrementActiveLoans();
 
-        // On pourrait ici créer un Loan et le renvoyer plus tard si besoin
-        return BorrowResult.Ok();
+        return BorrowResult.Ok(loan);
     }
 }
