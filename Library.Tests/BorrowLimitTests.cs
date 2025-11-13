@@ -35,4 +35,20 @@ public class BorrowLimitTests
         Assert.True(result.Success);
         Assert.Null(result.ErrorCode);
     }
+
+    [Fact]
+    public void Successful_borrow_increments_active_loans_count()
+    {
+        // Arrange
+        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 4);
+        var service = new BorrowingService();
+
+        // Act
+        var result = service.TryBorrow(user);
+
+        // Assert
+        Assert.True(result.Success);
+        Assert.Equal(5, user.ActiveLoansCount);
+    }
+
 }
