@@ -16,4 +16,15 @@ public class PenaltyService
 
         return overdueDays * dailyRate;
     }
+
+    public void ApplyOverduePenalty(UserAccount user, Loan loan, DateTime now, decimal dailyRate)
+    {
+        var penalty = CalculatePenalty(loan, now, dailyRate);
+
+        if (penalty <= 0m)
+            return;
+
+        user.AddAmountDue(penalty);
+    }
+
 }
