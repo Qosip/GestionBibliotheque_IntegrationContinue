@@ -6,4 +6,5 @@ namespace Library.Application;
 public interface IUserRepository
 {
     UserAccount? GetById(Guid id);
+    void Add(UserAccount user);
 }
