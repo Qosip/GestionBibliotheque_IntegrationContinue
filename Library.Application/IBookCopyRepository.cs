@@ -6,4 +6,5 @@ namespace Library.Application;
 public interface IBookCopyRepository
 {
     BookCopy? FindAvailableCopy(Guid bookId, Guid siteId);
+    BookCopy? GetById(Guid id);
 }

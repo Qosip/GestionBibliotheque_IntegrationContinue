@@ -35,7 +35,16 @@ public class BorrowBookHandlerTests
                     return copy;
                 }
             }
+            return null;
+        }
 
+        public BookCopy? GetById(Guid id)
+        {
+            foreach (var copy in _copies)
+            {
+                if (copy.Id == id)
+                    return copy;
+            }
             return null;
         }
     }
@@ -46,8 +55,19 @@ public class BorrowBookHandlerTests
 
         public void Add(Loan loan) => _loans.Add(loan);
 
+        public Loan? GetById(Guid id)
+        {
+            foreach (var loan in _loans)
+            {
+                if (loan.Id == id)
+                    return loan;
+            }
+            return null;
+        }
+
         public IReadOnlyList<Loan> Loans => _loans.AsReadOnly();
     }
+
 
     private sealed class FakeClock : IClock
     {
