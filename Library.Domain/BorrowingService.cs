@@ -1,18 +1,36 @@
-﻿namespace Library.Domain;
+﻿using System;
+
+namespace Library.Domain;
 
 public class BorrowingService
 {
     private const int MaxActiveLoans = 5;
 
-    public BorrowResult TryBorrow(UserAccount user)
+    public BorrowResult TryBorrow(UserAccount user, BookCopy copy, DateTime borrowedAt, DateTime dueDate)
     {
+        if (user is null) throw new ArgumentNullException(nameof(user));
+        if (copy is null) throw new ArgumentNullException(nameof(copy));
+
         if (user.ActiveLoansCount >= MaxActiveLoans)
         {
             return BorrowResult.Fail("BORROW_LIMIT_REACHED");
         }
 
+        if (copy.Status != BookCopyStatus.Available)
+        {
+            return BorrowResult.Fail("COPY_NOT_AVAILABLE");
+        }
+
+        if (dueDate < borrowedAt)
+        {
+            throw new ArgumentException("Due date cannot be before borrowed date.", nameof(dueDate));
+        }
+
+        // Règle validée : on effectue l’emprunt
+        copy.MarkAsBorrowed();
         user.IncrementActiveLoans();
 
+        // On pourrait ici créer un Loan et le renvoyer plus tard si besoin
         return BorrowResult.Ok();
     }
 }
