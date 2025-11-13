@@ -37,4 +37,21 @@ public class BookCopy
     {
         SiteId = newSiteId;
     }
+
+    public void MarkAsInTransfer()
+    {
+        if (Status != BookCopyStatus.Available)
+            throw new InvalidOperationException("Copy must be available to be put in transfer.");
+
+        Status = BookCopyStatus.InTransfer;
+    }
+
+    public void MarkAsArrived(Guid newSiteId)
+    {
+        if (Status != BookCopyStatus.InTransfer)
+            throw new InvalidOperationException("Copy must be in transfer to arrive at a site.");
+
+        SiteId = newSiteId;
+        Status = BookCopyStatus.Available;
+    }
 }
