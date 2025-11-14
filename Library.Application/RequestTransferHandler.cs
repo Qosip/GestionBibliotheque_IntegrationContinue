@@ -16,6 +16,12 @@ public sealed class RequestTransferHandler
     {
         if (command is null) throw new ArgumentNullException(nameof(command));
 
+        // Nouvelle validation : on refuse si source et cible identiques
+        if (command.SourceSiteId == command.TargetSiteId)
+        {
+            return RequestTransferResult.Fail("SOURCE_AND_TARGET_MUST_DIFFER");
+        }
+
         // Cherche une copie disponible sur le site source
         var copy = _bookCopyRepository.FindAvailableCopy(command.BookId, command.SourceSiteId);
         if (copy is null)
@@ -23,10 +29,8 @@ public sealed class RequestTransferHandler
             return RequestTransferResult.Fail("NO_COPY_AVAILABLE_AT_SOURCE_SITE");
         }
 
-        // On la met en transfert
         copy.MarkAsInTransfer();
 
-        // (Dans une vraie infra, on persisterait l'update via le repo)
         return RequestTransferResult.Ok(copy.Id);
     }
 }

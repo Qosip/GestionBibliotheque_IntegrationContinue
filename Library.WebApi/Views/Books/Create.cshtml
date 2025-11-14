@@ -1,0 +1,31 @@
+@model Library.Application.RegisterBookCommand
+
+@{
+    ViewData["Title"] = "Créer un livre";
+}
+
+<h2>Créer un livre</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="Isbn">ISBN</label>
+        <input asp-for="Isbn" />
+        <span asp-validation-for="Isbn" style="color:red"></span>
+    </div>
+    <div>
+        <label asp-for="Title">Titre</label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title" style="color:red"></span>
+    </div>
+    <div>
+        <label asp-for="Author">Auteur</label>
+        <input asp-for="Author" />
+        <span asp-validation-for="Author" style="color:red"></span>
+    </div>
+
+    <button type="submit">Créer</button>
+</form>
+
+<div>
+    <a href="/Home/Index">Retour à l'accueil</a>
+</div>

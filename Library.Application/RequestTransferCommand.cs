@@ -4,15 +4,18 @@ namespace Library.Application;
 
 public sealed class RequestTransferCommand
 {
-    public Guid BookId { get; }
-    public Guid SourceSiteId { get; }
-    public Guid TargetSiteId { get; }
+    public Guid BookId { get; set; }
+    public Guid SourceSiteId { get; set; }
+    public Guid TargetSiteId { get; set; }
 
+    // Constructeur sans paramètre pour MVC / Razor (GET, binding)
+    public RequestTransferCommand()
+    {
+    }
+
+    // Optionnel : constructeur pratique pour les tests / code
     public RequestTransferCommand(Guid bookId, Guid sourceSiteId, Guid targetSiteId)
     {
-        if (sourceSiteId == targetSiteId)
-            throw new ArgumentException("Source and target sites must be different.", nameof(targetSiteId));
-
         BookId = bookId;
         SourceSiteId = sourceSiteId;
         TargetSiteId = targetSiteId;

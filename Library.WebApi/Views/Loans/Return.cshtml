@@ -1,0 +1,23 @@
+@model Library.Application.ReturnBookCommand
+
+@{
+    ViewData["Title"] = "Retourner un livre";
+}
+
+<h2>Retourner un livre</h2>
+
+<p>Renseigne l'identifiant du prêt (LoanId).</p>
+
+<form asp-action="Return" method="post">
+    <div>
+        <label>LoanId</label>
+        <input asp-for="LoanId" />
+        <span asp-validation-for="LoanId" style="color:red"></span>
+    </div>
+
+    <button type="submit">Retourner</button>
+</form>
+
+<div>
+    <a href="/Home/Index">Retour à l'accueil</a>
+</div>

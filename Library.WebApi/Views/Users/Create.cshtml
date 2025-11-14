@@ -1,0 +1,21 @@
+@model Library.Application.RegisterUserCommand
+
+@{
+    ViewData["Title"] = "Créer un utilisateur";
+}
+
+<h2>Créer un utilisateur</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="Name">Nom</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" style="color:red"></span>
+    </div>
+
+    <button type="submit">Créer</button>
+</form>
+
+<div>
+    <a href="/Home/Index">Retour à l'accueil</a>
+</div>

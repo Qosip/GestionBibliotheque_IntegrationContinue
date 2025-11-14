@@ -1,0 +1,35 @@
+@model Library.WebApi.Models.AddBookCopyViewModel
+
+@{
+    ViewData["Title"] = "Ajouter un exemplaire";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Ajouter un exemplaire de livre</h2>
+
+        <form asp-action="AddCopy" method="post">
+            <div class="mb-3">
+                <label class="form-label">Livre</label>
+                <select asp-for="BookId" asp-items="Model.Books" class="form-select">
+                    <option value="">-- Sélectionner un livre --</option>
+                </select>
+                <span asp-validation-for="BookId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Site</label>
+                <select asp-for="SiteId" asp-items="Model.Sites" class="form-select">
+                    <option value="">-- Sélectionner un site --</option>
+                </select>
+                <span asp-validation-for="SiteId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ajouter l'exemplaire</button>
+        </form>
+
+        <div class="mt-3">
+            <a href="/Home/Index" class="btn btn-link">Retour à l'accueil</a>
+        </div>
+    </div>
+</div>

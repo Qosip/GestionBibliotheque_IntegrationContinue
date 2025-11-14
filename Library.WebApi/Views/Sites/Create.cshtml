@@ -1,0 +1,25 @@
+@model Library.Application.CreateSiteCommand
+
+@{
+    ViewData["Title"] = "Créer une bibliothèque";
+}
+
+<h2>Créer une bibliothèque</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="Name">Nom</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" style="color:red"></span>
+    </div>
+    <div>
+        <label asp-for="Address">Adresse</label>
+        <input asp-for="Address" />
+    </div>
+
+    <button type="submit">Créer</button>
+</form>
+
+<div>
+    <a href="/Home/Index">Retour à l'accueil</a>
+</div>

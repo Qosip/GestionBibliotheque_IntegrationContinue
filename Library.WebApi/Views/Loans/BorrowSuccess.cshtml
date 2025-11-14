@@ -1,0 +1,13 @@
+@model Library.Application.BorrowBookResult
+
+@{
+    ViewData["Title"] = "Emprunt effectué";
+}
+
+<h2>Emprunt effectué</h2>
+
+<p>Identifiant du prêt : @Model.LoanId</p>
+
+<div>
+    <a href="/Home/Index">Retour à l'accueil</a>
+</div>

@@ -94,15 +94,24 @@ public class RequestTransferHandlerTests
     }
 
     [Fact]
-    public void RequestTransferCommand_throws_when_source_and_target_are_same()
+    public void Handle_returns_error_when_source_and_target_sites_are_same()
     {
         // Arrange
-        var siteId = Guid.NewGuid();
+        var repo = new FakeBookCopyRepository();
+        var handler = new RequestTransferHandler(repo);
 
-        // Act + Assert
-        Assert.Throws<ArgumentException>(() =>
-        {
-            _ = new RequestTransferCommand(Guid.NewGuid(), siteId, siteId);
-        });
+        var siteId = Guid.NewGuid();
+        var command = new RequestTransferCommand(
+            bookId: Guid.NewGuid(),
+            sourceSiteId: siteId,
+            targetSiteId: siteId);
+
+        // Act
+        var result = handler.Handle(command);
+
+        // Assert
+        Assert.False(result.Success);
+        Assert.Equal("SOURCE_AND_TARGET_MUST_DIFFER", result.ErrorCode);
     }
+
 }
