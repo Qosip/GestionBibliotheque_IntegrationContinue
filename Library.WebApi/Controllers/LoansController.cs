@@ -32,7 +32,7 @@ public class LoansController : Controller
     {
         var vm = new BorrowViewModel();
 
-        // Liste des sites
+        // Sites disponibles
         vm.Sites = _db.Sites
             .Select(s => new SelectListItem
             {
@@ -54,14 +54,13 @@ public class LoansController : Controller
                 })
                 .ToList();
 
-            // Livres disponibles sur ce site (copies en statut Available)
+            // Livres disponibles sur le site
             var booksQuery =
-            from copy in _db.BookCopies
-            join book in _db.Books on copy.BookId equals book.Id
-            where copy.SiteId == siteId.Value && copy.Status == BookCopyStatus.Available
-            select new { book.Id, book.Title };
+                from copy in _db.BookCopies
+                join book in _db.Books on copy.BookId equals book.Id
+                where copy.SiteId == siteId.Value && copy.Status == BookCopyStatus.Available
+                select new { book.Id, book.Title };
 
-            // On ramène en mémoire avant le GroupBy
             var books = booksQuery
                 .AsEnumerable()
                 .GroupBy(b => b.Id)
@@ -75,7 +74,6 @@ public class LoansController : Controller
                     Text = b.Title
                 })
                 .ToList();
-
         }
         else
         {
@@ -97,7 +95,7 @@ public class LoansController : Controller
         {
             ModelState.AddModelError(string.Empty, result.ErrorCode ?? "Erreur inconnue");
 
-            // recharger les listes pour réafficher la vue
+            // Recharger les listes
             model.Sites = _db.Sites
                 .Select(s => new SelectListItem
                 {
@@ -120,9 +118,13 @@ public class LoansController : Controller
                 where copy.SiteId == model.SiteId && copy.Status == BookCopyStatus.Available
                 select new { book.Id, book.Title };
 
-            model.Books = booksQuery
+            var books = booksQuery
+                .AsEnumerable()
                 .GroupBy(b => b.Id)
                 .Select(g => g.First())
+                .ToList();
+
+            model.Books = books
                 .Select(b => new SelectListItem
                 {
                     Value = b.Id.ToString(),
@@ -137,23 +139,106 @@ public class LoansController : Controller
         return View("BorrowSuccess", result);
     }
 
-    // ===== Retour (laisse simple pour l'instant) =====
+    // ===== Retour =====
 
     [HttpGet]
-    public IActionResult Return()
+    public IActionResult Return(Guid? userId)
     {
-        return View(new ReturnBookCommand());
+        var vm = new ReturnViewModel();
+
+        // Liste des utilisateurs
+        vm.Users = _db.UserAccounts
+            .OrderBy(u => u.Name)
+            .Select(u => new SelectListItem
+            {
+                Value = u.Id.ToString(),
+                Text = u.Name
+            })
+            .ToList();
+
+        if (userId.HasValue && userId.Value != Guid.Empty)
+        {
+            vm.UserId = userId.Value;
+
+            // Prêts en cours pour cet utilisateur
+            var loansQuery =
+                from loan in _db.Loans
+                where loan.UserAccountId == userId.Value && loan.ReturnedAt == null
+                join copy in _db.BookCopies on loan.BookCopyId equals copy.Id
+                join book in _db.Books on copy.BookId equals book.Id
+                join site in _db.Sites on copy.SiteId equals site.Id
+                orderby loan.BorrowedAt descending
+                select new
+                {
+                    loan.Id,
+                    BookTitle = book.Title,
+                    SiteName = site.Name
+                };
+
+            var loans = loansQuery.ToList();
+
+            vm.Loans = loans
+                .Select(l => new SelectListItem
+                {
+                    Value = l.Id.ToString(),
+                    Text = $"{l.BookTitle} ({l.SiteName})"
+                })
+                .ToList();
+        }
+        else
+        {
+            vm.UserId = Guid.Empty;
+            vm.Loans = Enumerable.Empty<SelectListItem>();
+        }
+
+        return View(vm);
     }
 
     [HttpPost]
-    public IActionResult Return(ReturnBookCommand command)
+    public IActionResult Return(ReturnViewModel model)
     {
+        var command = new ReturnBookCommand(model.LoanId);
         var result = _returnHandler.Handle(command);
 
         if (!result.Success)
         {
             ModelState.AddModelError(string.Empty, result.ErrorCode ?? "Erreur inconnue");
-            return View(command);
+
+            // Recharger les listes
+            model.Users = _db.UserAccounts
+                .OrderBy(u => u.Name)
+                .Select(u => new SelectListItem
+                {
+                    Value = u.Id.ToString(),
+                    Text = u.Name
+                })
+                .ToList();
+
+            var loansQuery =
+                from loan in _db.Loans
+                where loan.UserAccountId == model.UserId && loan.ReturnedAt == null
+                join copy in _db.BookCopies on loan.BookCopyId equals copy.Id
+                join book in _db.Books on copy.BookId equals book.Id
+                join site in _db.Sites on copy.SiteId equals site.Id
+                orderby loan.BorrowedAt descending
+                select new
+                {
+                    loan.Id,
+                    BookTitle = book.Title,
+                    SiteName = site.Name
+                };
+
+            var loans = loansQuery.ToList();
+
+            model.Loans = loans
+                .Select(l => new SelectListItem
+                {
+                    Value = l.Id.ToString(),
+                    Text = $"{l.BookTitle} ({l.SiteName})"
+                })
+                .ToList();
+
+            return View(model);
         }
 
         return View("ReturnSuccess", result);

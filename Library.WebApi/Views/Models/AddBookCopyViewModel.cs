@@ -1,14 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Library.WebApi.Models;
+namespace Library.WebApi.Views.Models;
 
-public class AddBookCopyViewModel
+public sealed class AddBookCopyViewModel
 {
-    public Guid BookId { get; set; }
-    public Guid SiteId { get; set; }
+    [Required]
+    [Display(Name = "Livre")]
+    public Guid SelectedBookId { get; set; }
 
-    public IEnumerable<SelectListItem> Books { get; set; } = Array.Empty<SelectListItem>();
-    public IEnumerable<SelectListItem> Sites { get; set; } = Array.Empty<SelectListItem>();
+    [Required]
+    [Display(Name = "Site")]
+    public Guid SelectedSiteId { get; set; }
+
+    [Required]
+    [Range(1, 100, ErrorMessage = "La quantité doit être entre 1 et 100.")]
+    [Display(Name = "Quantité d'exemplaires")]
+    public int Quantity { get; set; } = 1;
+
+    public List<SelectListItem> Books { get; set; } = new();
+    public List<SelectListItem> Sites { get; set; } = new();
 }

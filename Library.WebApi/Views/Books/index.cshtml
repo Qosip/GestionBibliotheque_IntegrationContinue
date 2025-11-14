@@ -1,0 +1,35 @@
+﻿@model List<Library.WebApi.Views.Models.BookListItemViewModel>
+
+@{
+    ViewData["Title"] = "Liste des livres";
+}
+
+<h2 class="mb-3">Liste des livres</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>@b.Isbn</td>
+                <td>@b.Title</td>
+                <td>@b.Author</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-primary" href="/Books/AddCopy?bookId=@b.Id">
+                        Ajouter exemplaires
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Books/Create" class="btn btn-primary">Ajouter un nouveau livre</a>
