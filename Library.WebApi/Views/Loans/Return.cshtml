@@ -4,20 +4,33 @@
     ViewData["Title"] = "Retourner un livre";
 }
 
-<h2>Retourner un livre</h2>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Retourner un livre</h2>
 
-<p>Renseigne l'identifiant du prêt (LoanId).</p>
+        <p class="text-muted">
+            Renseigne l'identifiant du prêt (LoanId).
+        </p>
 
-<form asp-action="Return" method="post">
-    <div>
-        <label>LoanId</label>
-        <input asp-for="LoanId" />
-        <span asp-validation-for="LoanId" style="color:red"></span>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            </div>
+        }
+
+        <form asp-action="Return" method="post">
+            <div class="mb-3">
+                <label asp-for="LoanId" class="form-label">LoanId</label>
+                <input asp-for="LoanId" class="form-control" />
+                <span asp-validation-for="LoanId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Retourner</button>
+            <a href="/Home/Index" class="btn btn-link">Retour</a>
+        </form>
     </div>
-
-    <button type="submit">Retourner</button>
-</form>
-
-<div>
-    <a href="/Home/Index">Retour à l'accueil</a>
 </div>

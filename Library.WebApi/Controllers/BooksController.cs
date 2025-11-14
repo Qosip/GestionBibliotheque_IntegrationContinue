@@ -24,44 +24,13 @@ public class BooksController : Controller
         _db = db;
     }
 
-    // --- Création de livre ---
+    // ===== Création de livre + première copie =====
 
     [HttpGet]
     public IActionResult Create()
     {
-        return View(new RegisterBookCommand(string.Empty, string.Empty, string.Empty));
-    }
-
-    [HttpPost]
-    public IActionResult Create(RegisterBookCommand command)
-    {
-        var result = _registerBookHandler.Handle(command);
-
-        if (!result.Success)
+        var vm = new CreateBookWithCopyViewModel
         {
-            ModelState.AddModelError(string.Empty, result.ErrorCode ?? "Erreur inconnue");
-            return View(command);
-        }
-
-        ViewData["BookId"] = result.BookId;
-        return View("CreateSuccess", result);
-    }
-
-    // --- Ajout d'exemplaire avec listes déroulantes ---
-
-    [HttpGet]
-    public IActionResult AddCopy()
-    {
-        var vm = new AddBookCopyViewModel
-        {
-            Books = _db.Books
-                .Select(b => new SelectListItem
-                {
-                    Value = b.Id.ToString(),
-                    Text = b.Title
-                })
-                .ToList(),
-
             Sites = _db.Sites
                 .Select(s => new SelectListItem
                 {
@@ -75,19 +44,15 @@ public class BooksController : Controller
     }
 
     [HttpPost]
-    public IActionResult AddCopy(AddBookCopyViewModel model)
+    public IActionResult Create(CreateBookWithCopyViewModel model)
     {
+        if (model.SiteId == Guid.Empty)
+        {
+            ModelState.AddModelError(nameof(model.SiteId), "Un site doit être sélectionné.");
+        }
+
         if (!ModelState.IsValid)
         {
-            // Recharger les listes si besoin
-            model.Books = _db.Books
-                .Select(b => new SelectListItem
-                {
-                    Value = b.Id.ToString(),
-                    Text = b.Title
-                })
-                .ToList();
-
             model.Sites = _db.Sites
                 .Select(s => new SelectListItem
                 {
@@ -99,20 +64,12 @@ public class BooksController : Controller
             return View(model);
         }
 
-        var command = new AddBookCopyCommand(model.BookId, model.SiteId);
-        var result = _addBookCopyHandler.Handle(command);
+        var registerCommand = new RegisterBookCommand(model.Isbn, model.Title, model.Author);
+        var registerResult = _registerBookHandler.Handle(registerCommand);
 
-        if (!result.Success)
+        if (!registerResult.Success)
         {
-            ModelState.AddModelError(string.Empty, result.ErrorCode ?? "Erreur inconnue");
-
-            model.Books = _db.Books
-                .Select(b => new SelectListItem
-                {
-                    Value = b.Id.ToString(),
-                    Text = b.Title
-                })
-                .ToList();
+            ModelState.AddModelError(string.Empty, registerResult.ErrorCode ?? "Erreur lors de la création du livre.");
 
             model.Sites = _db.Sites
                 .Select(s => new SelectListItem
@@ -125,7 +82,28 @@ public class BooksController : Controller
             return View(model);
         }
 
-        ViewData["BookCopyId"] = result.BookCopyId;
-        return View("AddCopySuccess", result);
+        var addCopyCommand = new AddBookCopyCommand(registerResult.BookId, model.SiteId);
+        var addCopyResult = _addBookCopyHandler.Handle(addCopyCommand);
+
+        if (!addCopyResult.Success)
+        {
+            ModelState.AddModelError(string.Empty, addCopyResult.ErrorCode ?? "Erreur lors de la création de l'exemplaire.");
+
+            model.Sites = _db.Sites
+                .Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Name
+                })
+                .ToList();
+
+            return View(model);
+        }
+
+        ViewBag.BookId = registerResult.BookId;
+        ViewBag.BookCopyId = addCopyResult.BookCopyId;
+        ViewBag.SiteId = model.SiteId;
+
+        return View("CreateSuccess");
     }
 }

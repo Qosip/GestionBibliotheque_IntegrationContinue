@@ -2,15 +2,32 @@
     ViewData["Title"] = "Accueil bibliothèque";
 }
 
-<h1>Gestion de bibliothèque</h1>
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title mb-4">Gestion de bibliothèque</h1>
 
-<ul>
-    <li><a href="/Users/Create">Créer un utilisateur</a></li>
-    <li><a href="/Sites/Create">Créer une bibliothèque</a></li>
-    <li><a href="/Books/Create">Créer un livre</a></li>
-    <li><a href="/Books/AddCopy">Ajouter un exemplaire de livre</a></li>
-    <li><a href="/Loans/Borrow">Emprunter un livre</a></li>
-    <li><a href="/Loans/Return">Retourner un livre</a></li>
-    <li><a href="/Transfers/Request">Demander un transfert</a></li>
-    <li><a href="/swagger">Swagger (API technique)</a></li>
-</ul>
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Administration</h5>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item"><a href="/Users/Create">Créer un utilisateur</a></li>
+                    <li class="list-group-item"><a href="/Sites/Create">Créer une bibliothèque (site)</a></li>
+                    <li class="list-group-item"><a href="/Books/Create">Créer un livre</a></li>
+                    <li class="list-group-item"><a href="/Books/AddCopy">Ajouter un exemplaire</a></li>
+                    <li class="list-group-item"><a href="/Users">Liste des utilisateurs</a></li>
+                    <li class="list-group-item"><a href="/Sites">Liste des sites</a></li>
+
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5>Opérations</h5>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item"><a href="/Loans/Borrow">Emprunter un livre</a></li>
+                    <li class="list-group-item"><a href="/Loans/Return">Retourner un livre</a></li>
+                    <li class="list-group-item"><a href="/Transfers/Request">Demander un transfert</a></li>
+                    <li class="list-group-item"><a href="/swagger">Swagger (API technique)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

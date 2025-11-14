@@ -1,0 +1,63 @@
+﻿@model Library.WebApi.Models.UserDetailsViewModel
+
+@{
+    ViewData["Title"] = "Détail utilisateur";
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Utilisateur : @Model.Name</h2>
+
+        <dl class="row">
+            <dt class="col-sm-3">Id</dt>
+            <dd class="col-sm-9"><code>@Model.UserId</code></dd>
+
+            <dt class="col-sm-3">Prêts en cours</dt>
+            <dd class="col-sm-9">@Model.ActiveLoansCount</dd>
+
+            <dt class="col-sm-3">Montant dû</dt>
+            <dd class="col-sm-9">@Model.AmountDue.ToString("0.00")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title mb-3">Emprunts</h3>
+
+        @if (!Model.Loans.Any())
+        {
+            <p class="text-muted">Aucun emprunt trouvé pour cet utilisateur.</p>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Livre</th>
+                        <th>Site</th>
+                        <th>Emprunté le</th>
+                        <th>À rendre le</th>
+                        <th>Retourné le</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var loan in Model.Loans)
+                    {
+                        <tr>
+                            <td>@loan.BookTitle</td>
+                            <td>@loan.SiteName</td>
+                            <td>@loan.BorrowedAt.ToString("yyyy-MM-dd")</td>
+                            <td>@loan.DueDate.ToString("yyyy-MM-dd")</td>
+                            <td>@(loan.ReturnedAt?.ToString("yyyy-MM-dd") ?? "-")</td>
+                            <td>@loan.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <a asp-action="Index" class="btn btn-link">Retour à la liste des utilisateurs</a>
+    </div>
+</div>

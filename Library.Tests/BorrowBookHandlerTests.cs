@@ -90,7 +90,7 @@ public class BorrowBookHandlerTests
         var bookId = Guid.NewGuid();
         var siteId = Guid.NewGuid();
 
-        var user = new UserAccount(userId, activeLoansCount: 0, amountDue: 0m);
+        var user = new UserAccount(userId, "Test user", activeLoansCount: 0, amountDue: 0m);
         userRepo.Add(user);
 
         var copy = new BookCopy(bookId, siteId);
@@ -157,7 +157,7 @@ public class BorrowBookHandlerTests
         var bookId = Guid.NewGuid();
         var siteId = Guid.NewGuid();
 
-        var user = new UserAccount(userId, activeLoansCount: 0, amountDue: 0m);
+        var user = new UserAccount(userId, "Test user", activeLoansCount: 0, amountDue: 0m);
         userRepo.Add(user);
 
         // On ajoute un exemplaire mais sur un autre site -> pas dispo pour ce site

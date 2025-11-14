@@ -19,7 +19,7 @@ public class BorrowingServiceTests
         string? expectedErrorCode)
     {
         // Arrange
-        var user = new UserAccount(Guid.NewGuid(), activeLoans, amountDue: 0m);
+        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoans, amountDue: 0m);
 
         var bookId = Guid.NewGuid();
         var siteId = Guid.NewGuid();
@@ -61,7 +61,7 @@ public class BorrowingServiceTests
     public void TryBorrow_throws_when_due_date_before_borrowed_date()
     {
         // Arrange
-        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 0, amountDue: 0m);
+        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 0, amountDue: 0m);
         var copy = new BookCopy(Guid.NewGuid(), Guid.NewGuid());
 
         var borrowedAt = new DateTime(2025, 1, 10);
@@ -80,7 +80,7 @@ public class BorrowingServiceTests
     public void Successful_borrow_creates_loan_with_correct_data()
     {
         // Arrange
-        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 0, amountDue: 0m);
+        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 0, amountDue: 0m);
 
         var bookId = Guid.NewGuid();
         var siteId = Guid.NewGuid();
@@ -109,7 +109,7 @@ public class BorrowingServiceTests
     public void Failed_borrow_does_not_create_loan()
     {
         // Arrange
-        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 5, amountDue: 0m);
+        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 5, amountDue: 0m);
 
         var bookId = Guid.NewGuid();
         var siteId = Guid.NewGuid();

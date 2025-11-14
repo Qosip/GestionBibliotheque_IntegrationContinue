@@ -10,7 +10,7 @@ public class PenaltyApplicationTests
     public void ApplyOverduePenalty_updates_user_AmountDue_when_loan_is_overdue()
     {
         // Arrange
-        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 1, amountDue: 0m);
+        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 1, amountDue: 0m);
         var borrowedAt = new DateTime(2025, 1, 1);
         var dueDate = new DateTime(2025, 1, 10);
         var now = new DateTime(2025, 1, 13); // 3 jours de retard
@@ -29,7 +29,7 @@ public class PenaltyApplicationTests
     public void ApplyOverduePenalty_does_not_change_AmountDue_when_not_overdue()
     {
         // Arrange
-        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 1, amountDue: 10m);
+        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 1, amountDue: 10m);
         var borrowedAt = new DateTime(2025, 1, 1);
         var dueDate = new DateTime(2025, 1, 10);
         var now = new DateTime(2025, 1, 10); // pas de retard

@@ -23,6 +23,7 @@ public sealed class RegisterUserHandler
 
         var user = new UserAccount(
             id: Guid.NewGuid(),
+            command.Name,
             activeLoansCount: 0,
             amountDue: 0m);
 

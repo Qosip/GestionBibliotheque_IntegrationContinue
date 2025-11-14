@@ -4,10 +4,14 @@
     ViewData["Title"] = "Emprunt effectué";
 }
 
-<h2>Emprunt effectué</h2>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Emprunt effectué</h2>
 
-<p>Identifiant du prêt : @Model.LoanId</p>
+        <p>Identifiant du prêt :</p>
+        <pre class="bg-light p-2">@Model.LoanId</pre>
 
-<div>
-    <a href="/Home/Index">Retour à l'accueil</a>
+        <a href="/Home/Index" class="btn btn-primary">Retour à l'accueil</a>
+        <a href="/Loans/Borrow" class="btn btn-outline-secondary ms-2">Nouvel emprunt</a>
+    </div>
 </div>

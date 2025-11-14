@@ -4,10 +4,14 @@ namespace Library.Domain;
 
 public class Book
 {
-    public Guid Id { get; }
-    public string Isbn { get; }
-    public string Title { get; }
-    public string Author { get; }
+    public Guid Id { get; private set; }
+    public string Isbn { get; private set; } = string.Empty;
+    public string Title { get; private set; } = string.Empty;
+    public string Author { get; private set; } = string.Empty;
+
+    private Book()
+    {
+    }
 
     public Book(Guid id, string isbn, string title, string author)
     {

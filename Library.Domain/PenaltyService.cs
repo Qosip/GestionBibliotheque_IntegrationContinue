@@ -24,7 +24,7 @@ public class PenaltyService
         if (penalty <= 0m)
             return;
 
-        user.AddAmountDue(penalty);
+        user.AddAmount(penalty);
     }
 
 }

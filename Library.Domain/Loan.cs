@@ -4,12 +4,16 @@ namespace Library.Domain;
 
 public class Loan
 {
-    public Guid Id { get; }
-    public Guid UserAccountId { get; }
-    public Guid BookCopyId { get; }
-    public DateTime BorrowedAt { get; }
-    public DateTime DueDate { get; }
+    public Guid Id { get; private set; }
+    public Guid UserAccountId { get; private set; }
+    public Guid BookCopyId { get; private set; }
+    public DateTime BorrowedAt { get; private set; }
+    public DateTime DueDate { get; private set; }
     public DateTime? ReturnedAt { get; private set; }
+
+    private Loan()
+    {
+    }
 
     // Constructeur existant (utilisé par LoanOverdueTests)
     public Loan(DateTime borrowedAt, DateTime dueDate)

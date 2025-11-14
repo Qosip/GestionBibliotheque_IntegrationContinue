@@ -1,4 +1,4 @@
-@model Library.WebApi.Models.AddBookCopyViewModel
+@model Library.Application.AddBookCopyCommand
 
 @{
     ViewData["Title"] = "Ajouter un exemplaire";
@@ -8,28 +8,35 @@
     <div class="card-body">
         <h2 class="card-title mb-3">Ajouter un exemplaire de livre</h2>
 
+        <p class="text-muted">
+            Pour l’instant, renseigne les GUID du livre (BookId) et du site (SiteId).
+        </p>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            </div>
+        }
+
         <form asp-action="AddCopy" method="post">
             <div class="mb-3">
-                <label class="form-label">Livre</label>
-                <select asp-for="BookId" asp-items="Model.Books" class="form-select">
-                    <option value="">-- Sélectionner un livre --</option>
-                </select>
+                <label asp-for="BookId" class="form-label">BookId</label>
+                <input asp-for="BookId" class="form-control" />
                 <span asp-validation-for="BookId" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Site</label>
-                <select asp-for="SiteId" asp-items="Model.Sites" class="form-select">
-                    <option value="">-- Sélectionner un site --</option>
-                </select>
+                <label asp-for="SiteId" class="form-label">SiteId</label>
+                <input asp-for="SiteId" class="form-control" />
                 <span asp-validation-for="SiteId" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn btn-primary">Ajouter l'exemplaire</button>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <a href="/Home/Index" class="btn btn-link">Retour</a>
         </form>
-
-        <div class="mt-3">
-            <a href="/Home/Index" class="btn btn-link">Retour à l'accueil</a>
-        </div>
     </div>
 </div>

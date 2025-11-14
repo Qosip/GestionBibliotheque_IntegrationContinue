@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Library.Domain.UserAccount>
+
+@{
+    ViewData["Title"] = "Utilisateurs";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Utilisateurs</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prêts en cours</th>
+                    <th>Montant dû</th>
+                    <th>Id</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model)
+                {
+                    <tr>
+                        <td>@u.Name</td>
+                        <td>@u.ActiveLoansCount</td>
+                        <td>@u.AmountDue.ToString("0.00")</td>
+                        <td><code>@u.Id</code></td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@u.Id" class="btn btn-sm btn-outline-primary">
+                                Voir les emprunts
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a href="/Users/Create" class="btn btn-primary">Créer un utilisateur</a>
+        <a href="/Home/Index" class="btn btn-link">Retour</a>
+    </div>
+</div>

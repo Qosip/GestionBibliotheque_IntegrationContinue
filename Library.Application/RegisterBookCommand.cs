@@ -4,9 +4,13 @@ namespace Library.Application;
 
 public sealed class RegisterBookCommand
 {
-    public string Isbn { get; }
-    public string Title { get; }
-    public string Author { get; }
+    public string Isbn { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
+
+    public RegisterBookCommand()
+    {
+    }
 
     public RegisterBookCommand(string isbn, string title, string author)
     {

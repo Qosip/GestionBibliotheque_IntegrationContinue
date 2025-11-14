@@ -4,39 +4,36 @@ namespace Library.Domain;
 
 public class UserAccount
 {
-    public Guid Id { get; }
+    public Guid Id { get; private set; }
+    public string Name { get; private set; } = string.Empty;
     public int ActiveLoansCount { get; private set; }
     public decimal AmountDue { get; private set; }
 
-    public UserAccount(Guid id, int activeLoansCount = 0, decimal amountDue = 0m)
+    // Ctor pour EF Core
+    private UserAccount()
     {
+    }
+
+    // Cas normal : création d'un utilisateur avec un nom
+    public UserAccount(Guid id, string name)
+        : this(id, name, 0, 0m)
+    {
+    }
+
+    // Ctor complet, utile pour tests ou scénarios avancés
+    public UserAccount(Guid id, string name, int activeLoansCount, decimal amountDue)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name cannot be empty.", nameof(name));
+
         Id = id;
+        Name = name.Trim();
         ActiveLoansCount = activeLoansCount;
-
-        if (amountDue < 0)
-            throw new ArgumentOutOfRangeException(nameof(amountDue), "Initial amount due cannot be negative.");
-
         AmountDue = amountDue;
     }
 
-    public void IncrementActiveLoans()
-    {
-        ActiveLoansCount++;
-    }
-
-    public void DecrementActiveLoans()
-    {
-        if (ActiveLoansCount == 0)
-            throw new InvalidOperationException("Cannot decrement when there are no active loans.");
-
-        ActiveLoansCount--;
-    }
-
-    public void AddAmountDue(decimal amount)
-    {
-        if (amount < 0)
-            throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be non-negative.");
-
-        AmountDue += amount;
-    }
+    public void IncrementLoans() => ActiveLoansCount++;
+    public void DecrementLoans() => ActiveLoansCount--;
+    public void AddAmount(decimal amount) => AmountDue += amount;
+    public void PayAmount(decimal amount) => AmountDue -= amount;
 }

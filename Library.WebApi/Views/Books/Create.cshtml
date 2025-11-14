@@ -1,31 +1,52 @@
-@model Library.Application.RegisterBookCommand
+@model Library.WebApi.Models.CreateBookWithCopyViewModel
 
 @{
     ViewData["Title"] = "Créer un livre";
 }
 
-<h2>Créer un livre</h2>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Créer un livre sur un site</h2>
 
-<form asp-action="Create" method="post">
-    <div>
-        <label asp-for="Isbn">ISBN</label>
-        <input asp-for="Isbn" />
-        <span asp-validation-for="Isbn" style="color:red"></span>
-    </div>
-    <div>
-        <label asp-for="Title">Titre</label>
-        <input asp-for="Title" />
-        <span asp-validation-for="Title" style="color:red"></span>
-    </div>
-    <div>
-        <label asp-for="Author">Auteur</label>
-        <input asp-for="Author" />
-        <span asp-validation-for="Author" style="color:red"></span>
-    </div>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            </div>
+        }
 
-    <button type="submit">Créer</button>
-</form>
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="Isbn" class="form-label">ISBN</label>
+                <input asp-for="Isbn" class="form-control" />
+                <span asp-validation-for="Isbn" class="text-danger"></span>
+            </div>
 
-<div>
-    <a href="/Home/Index">Retour à l'accueil</a>
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label">Titre</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Author" class="form-label">Auteur</label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SiteId" class="form-label">Site</label>
+                <select asp-for="SiteId" asp-items="Model.Sites" class="form-select">
+                    <option value="">-- Sélectionner un site --</option>
+                </select>
+                <span asp-validation-for="SiteId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Créer le livre et le premier exemplaire</button>
+            <a href="/Home/Index" class="btn btn-link">Retour</a>
+        </form>
+    </div>
 </div>

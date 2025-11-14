@@ -4,13 +4,25 @@ namespace Library.Domain;
 
 public class BookCopy
 {
-    public Guid Id { get; }
-    public Guid BookId { get; }
+    public Guid Id { get; private set; }
+    public Guid BookId { get; private set; }
     public Guid SiteId { get; private set; }
     public BookCopyStatus Status { get; private set; }
 
+    // Ctor sans paramètre pour EF Core
+    private BookCopy()
+    {
+    }
+
+    // Ctor métier
     public BookCopy(Guid bookId, Guid siteId)
     {
+        if (bookId == Guid.Empty)
+            throw new ArgumentException("BookId cannot be empty.", nameof(bookId));
+
+        if (siteId == Guid.Empty)
+            throw new ArgumentException("SiteId cannot be empty.", nameof(siteId));
+
         Id = Guid.NewGuid();
         BookId = bookId;
         SiteId = siteId;
@@ -35,6 +47,9 @@ public class BookCopy
 
     public void MoveToSite(Guid newSiteId)
     {
+        if (newSiteId == Guid.Empty)
+            throw new ArgumentException("SiteId cannot be empty.", nameof(newSiteId));
+
         SiteId = newSiteId;
     }
 
@@ -50,6 +65,9 @@ public class BookCopy
     {
         if (Status != BookCopyStatus.InTransfer)
             throw new InvalidOperationException("Copy must be in transfer to arrive at a site.");
+
+        if (newSiteId == Guid.Empty)
+            throw new ArgumentException("SiteId cannot be empty.", nameof(newSiteId));
 
         SiteId = newSiteId;
         Status = BookCopyStatus.Available;

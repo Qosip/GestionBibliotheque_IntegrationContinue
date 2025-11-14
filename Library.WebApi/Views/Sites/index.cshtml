@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Library.Domain.Site>
+
+@{
+    ViewData["Title"] = "Sites";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Sites (bibliothèques)</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Adresse</th>
+                    <th>Id</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.Name</td>
+                        <td>@s.Address</td>
+                        <td><code>@s.Id</code></td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@s.Id" class="btn btn-sm btn-outline-primary">
+                                Voir les livres
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a href="/Sites/Create" class="btn btn-primary">Créer un site</a>
+        <a href="/Home/Index" class="btn btn-link">Retour</a>
+    </div>
+</div>

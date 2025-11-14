@@ -31,7 +31,7 @@ public class BorrowingService
 
         // Mise à jour des états
         copy.MarkAsBorrowed();
-        user.IncrementActiveLoans();
+        user.IncrementLoans();
 
         return BorrowResult.Ok(loan);
     }

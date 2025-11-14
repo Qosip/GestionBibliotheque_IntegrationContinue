@@ -20,7 +20,8 @@ public class TransfersController : Controller
     }
 
     [HttpGet]
-    public IActionResult Request()
+    [ActionName("Request")]
+    public IActionResult RequestGet()
     {
         var vm = new TransferRequestViewModel
         {
@@ -31,7 +32,6 @@ public class TransfersController : Controller
                     Text = b.Title
                 })
                 .ToList(),
-
             Sites = _db.Sites
                 .Select(s => new SelectListItem
                 {
@@ -45,13 +45,10 @@ public class TransfersController : Controller
     }
 
     [HttpPost]
-    public IActionResult Request(TransferRequestViewModel model)
+    [ActionName("Request")]
+    public IActionResult RequestPost(TransferRequestViewModel model)
     {
-        var command = new RequestTransferCommand(
-            model.BookId,
-            model.SourceSiteId,
-            model.TargetSiteId);
-
+        var command = new RequestTransferCommand(model.BookId, model.SourceSiteId, model.TargetSiteId);
         var result = _handler.Handle(command);
 
         if (!result.Success)
@@ -65,7 +62,6 @@ public class TransfersController : Controller
                     Text = b.Title
                 })
                 .ToList();
-
             model.Sites = _db.Sites
                 .Select(s => new SelectListItem
                 {
@@ -77,7 +73,7 @@ public class TransfersController : Controller
             return View(model);
         }
 
-        ViewData["BookCopyId"] = result.BookCopyId;
+        ViewBag.BookCopyId = result.BookCopyId;
         return View("RequestSuccess", result);
     }
 }

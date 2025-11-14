@@ -10,7 +10,8 @@ builder.Services.AddControllersWithViews();
 
 // === EF Core InMemory ===
 builder.Services.AddDbContext<LibraryDbContext>(options =>
-    options.UseInMemoryDatabase("LibraryDb"));
+    options.UseSqlite("Data Source=library.db"));
+
 
 // === Repositories (implémentations EF) ===
 builder.Services.AddScoped<IUserRepository, EfUserRepository>();
@@ -110,5 +111,11 @@ app.MapPost("/api/transfers", (RequestTransferCommand cmd, RequestTransferHandle
     var result = handler.Handle(cmd);
     return result.Success ? Results.Ok(result) : Results.BadRequest(result);
 });
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<LibraryDbContext>();
+    db.Database.EnsureCreated();
+}
 
 app.Run();

@@ -4,10 +4,13 @@ namespace Library.Domain;
 
 public class Site
 {
-    public Guid Id { get; }
-    public string Name { get; }
-    public string? Address { get; }
+    public Guid Id { get; private set; }
+    public string Name { get; private set; } = string.Empty;
+    public string? Address { get; private set; }
 
+    private Site()
+    {
+    }
     public Site(Guid id, string name, string? address = null)
     {
         if (string.IsNullOrWhiteSpace(name))

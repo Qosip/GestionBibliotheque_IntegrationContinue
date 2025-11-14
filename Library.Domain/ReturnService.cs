@@ -26,6 +26,6 @@ public class ReturnService
         _penaltyService.ApplyOverduePenalty(user, loan, returnDate, dailyRate);
 
         // Décrémente le compteur d’emprunts actifs
-        user.DecrementActiveLoans();
+        user.DecrementLoans();
     }
 }

@@ -1,25 +1,38 @@
 @model Library.Application.CreateSiteCommand
 
 @{
-    ViewData["Title"] = "Créer une bibliothèque";
+    ViewData["Title"] = "Créer un site";
 }
 
-<h2>Créer une bibliothèque</h2>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Créer une bibliothèque (site)</h2>
 
-<form asp-action="Create" method="post">
-    <div>
-        <label asp-for="Name">Nom</label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name" style="color:red"></span>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            </div>
+        }
+
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Nom</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label">Adresse</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Créer</button>
+            <a href="/Home/Index" class="btn btn-link">Retour</a>
+        </form>
     </div>
-    <div>
-        <label asp-for="Address">Adresse</label>
-        <input asp-for="Address" />
-    </div>
-
-    <button type="submit">Créer</button>
-</form>
-
-<div>
-    <a href="/Home/Index">Retour à l'accueil</a>
 </div>

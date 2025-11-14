@@ -4,18 +4,29 @@
     ViewData["Title"] = "Créer un utilisateur";
 }
 
-<h2>Créer un utilisateur</h2>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title mb-3">Créer un utilisateur</h2>
 
-<form asp-action="Create" method="post">
-    <div>
-        <label asp-for="Name">Nom</label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name" style="color:red"></span>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            </div>
+        }
+
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Nom</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Créer</button>
+            <a href="/Home/Index" class="btn btn-link">Retour</a>
+        </form>
     </div>
-
-    <button type="submit">Créer</button>
-</form>
-
-<div>
-    <a href="/Home/Index">Retour à l'accueil</a>
 </div>

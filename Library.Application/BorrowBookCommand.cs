@@ -4,9 +4,13 @@ namespace Library.Application;
 
 public sealed class BorrowBookCommand
 {
-    public Guid UserId { get; }
-    public Guid BookId { get; }
-    public Guid SiteId { get; }
+    public Guid UserId { get; set; }
+    public Guid BookId { get; set; }
+    public Guid SiteId { get; set; }
+
+    public BorrowBookCommand()
+    {
+    }
 
     public BorrowBookCommand(Guid userId, Guid bookId, Guid siteId)
     {

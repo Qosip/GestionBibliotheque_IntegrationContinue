@@ -101,7 +101,7 @@ public class ReturnBookHandlerTests
         var bookId = Guid.NewGuid();
         var siteId = Guid.NewGuid();
 
-        var user = new UserAccount(userId, activeLoansCount: 1, amountDue: initialAmountDue);
+        var user = new UserAccount(userId, "Test user", activeLoansCount: 1, amountDue: initialAmountDue);
         userRepo.Add(user);
 
         var copy = new BookCopy(bookId, siteId);
@@ -208,7 +208,7 @@ public class ReturnBookHandlerTests
         var bookId = Guid.NewGuid();
         var siteId = Guid.NewGuid();
 
-        var user = new UserAccount(userId, activeLoansCount: 1, amountDue: 0m);
+        var user = new UserAccount(userId, "Test user", activeLoansCount: 1, amountDue: 0m);
         userRepo.Add(user);
 
         var borrowedAt = new DateTime(2025, 1, 1);

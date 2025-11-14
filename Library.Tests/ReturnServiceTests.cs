@@ -25,7 +25,7 @@ public class ReturnServiceTests
         var dueDate = new DateTime(dYear, dMonth, dDay);
         var returnDate = new DateTime(rYear, rMonth, rDay);
 
-        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 1, amountDue: initialAmountDue);
+        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 1, amountDue: initialAmountDue);
         var loan = new Loan(borrowedAt, dueDate);
 
         var penaltyService = new PenaltyService();
@@ -49,7 +49,7 @@ public class ReturnServiceTests
         var firstReturn = new DateTime(2025, 1, 11);
         var secondReturn = new DateTime(2025, 1, 12);
 
-        var user = new UserAccount(Guid.NewGuid(), activeLoansCount: 1, amountDue: 0m);
+        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 1, amountDue: 0m);
         var loan = new Loan(borrowedAt, dueDate);
         loan.MarkAsReturned(firstReturn);
 
