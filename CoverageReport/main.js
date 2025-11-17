@@ -213,56 +213,40 @@ var assemblies = [
   {
     "name": "Library.Application",
     "classes": [
-      { "name": "Library.Application.BorrowBookCommand", "rp": "Library.Application_BorrowBookCommand.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.BorrowBookHandler", "rp": "Library.Application_BorrowBookHandler.html", "cl": 30, "ucl": 2, "cal": 32, "tl": 61, "cb": 12, "tb": 22, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.BorrowBookResult", "rp": "Library.Application_BorrowBookResult.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Commands.AddBookCopyCommand", "rp": "Library.Application_AddBookCopyCommand.html", "cl": 0, "ucl": 20, "cal": 20, "tl": 38, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Commands.BorrowBookCommand", "rp": "Library.Application_BorrowBookCommand.2.html", "cl": 0, "ucl": 24, "cal": 24, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Commands.CreateSiteCommand", "rp": "Library.Application_CreateSiteCommand.html", "cl": 0, "ucl": 20, "cal": 20, "tl": 38, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Commands.RegisterBookCommand", "rp": "Library.Application_RegisterBookCommand.html", "cl": 0, "ucl": 24, "cal": 24, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Commands.RegisterUserCommand", "rp": "Library.Application_RegisterUserCommand.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 38, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Commands.RequestTransferCommand", "rp": "Library.Application_RequestTransferCommand.html", "cl": 0, "ucl": 24, "cal": 24, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Commands.ReturnBookCommand", "rp": "Library.Application_ReturnBookCommand.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Handlers.AddBookCopyHandler", "rp": "Library.Application_AddBookCopyHandler.html", "cl": 0, "ucl": 42, "cal": 42, "tl": 86, "cb": 0, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Handlers.BorrowBookHandler", "rp": "Library.Application_BorrowBookHandler.2.html", "cl": 0, "ucl": 66, "cal": 66, "tl": 120, "cb": 0, "tb": 20, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Handlers.CreateSiteHandler", "rp": "Library.Application_CreateSiteHandler.html", "cl": 0, "ucl": 26, "cal": 26, "tl": 66, "cb": 0, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Handlers.RegisterBookHandler", "rp": "Library.Application_RegisterBookHandler.html", "cl": 0, "ucl": 30, "cal": 30, "tl": 70, "cb": 0, "tb": 20, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Handlers.RegisterUserHandler", "rp": "Library.Application_RegisterUserHandler.html", "cl": 0, "ucl": 34, "cal": 34, "tl": 76, "cb": 0, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Handlers.RequestTransferHandler", "rp": "Library.Application_RequestTransferHandler.html", "cl": 0, "ucl": 32, "cal": 32, "tl": 78, "cb": 0, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Handlers.ReturnBookHandler", "rp": "Library.Application_ReturnBookHandler.html", "cl": 0, "ucl": 66, "cal": 66, "tl": 128, "cb": 0, "tb": 36, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.RequestTransferCommand", "rp": "Library.Application_RequestTransferCommand.2.html", "cl": 10, "ucl": 1, "cal": 11, "tl": 20, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.RequestTransferHandler", "rp": "Library.Application_RequestTransferHandler.2.html", "cl": 13, "ucl": 0, "cal": 13, "tl": 32, "cb": 4, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.RequestTransferResult", "rp": "Library.Application_RequestTransferResult.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Results.AddBookCopyResult", "rp": "Library.Application_AddBookCopyResult.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 46, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Results.BorrowBookResult", "rp": "Library.Application_BorrowBookResult.2.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 46, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Results.CreateSiteResult", "rp": "Library.Application_CreateSiteResult.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 46, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Results.RegisterBookResult", "rp": "Library.Application_RegisterBookResult.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 46, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Results.RegisterUserResult", "rp": "Library.Application_RegisterUserResult.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 46, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Results.RequestTransferResult", "rp": "Library.Application_RequestTransferResult.2.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 46, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.Results.ReturnBookResult", "rp": "Library.Application_ReturnBookResult.html", "cl": 0, "ucl": 18, "cal": 18, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.ReturnBookCommand", "rp": "Library.Application_ReturnBookCommand.2.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.ReturnBookHandler", "rp": "Library.Application_ReturnBookHandler.2.html", "cl": 32, "ucl": 1, "cal": 33, "tl": 63, "cb": 12, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Application.ReturnBookResult", "rp": "Library.Application_ReturnBookResult.2.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Commands.AddBookCopyCommand", "rp": "Library.Application_AddBookCopyCommand.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Commands.BorrowBookCommand", "rp": "Library.Application_BorrowBookCommand.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Commands.CreateSiteCommand", "rp": "Library.Application_CreateSiteCommand.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Commands.RegisterBookCommand", "rp": "Library.Application_RegisterBookCommand.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Commands.RegisterUserCommand", "rp": "Library.Application_RegisterUserCommand.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Commands.RequestTransferCommand", "rp": "Library.Application_RequestTransferCommand.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Commands.ReturnBookCommand", "rp": "Library.Application_ReturnBookCommand.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Handlers.AddBookCopyHandler", "rp": "Library.Application_AddBookCopyHandler.html", "cl": 0, "ucl": 21, "cal": 21, "tl": 43, "cb": 0, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Handlers.BorrowBookHandler", "rp": "Library.Application_BorrowBookHandler.html", "cl": 0, "ucl": 33, "cal": 33, "tl": 60, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Handlers.CreateSiteHandler", "rp": "Library.Application_CreateSiteHandler.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 33, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Handlers.RegisterBookHandler", "rp": "Library.Application_RegisterBookHandler.html", "cl": 0, "ucl": 15, "cal": 15, "tl": 35, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Handlers.RegisterUserHandler", "rp": "Library.Application_RegisterUserHandler.html", "cl": 0, "ucl": 17, "cal": 17, "tl": 38, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Handlers.RequestTransferHandler", "rp": "Library.Application_RequestTransferHandler.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 39, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Handlers.ReturnBookHandler", "rp": "Library.Application_ReturnBookHandler.html", "cl": 0, "ucl": 33, "cal": 33, "tl": 64, "cb": 0, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Results.AddBookCopyResult", "rp": "Library.Application_AddBookCopyResult.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Results.BorrowBookResult", "rp": "Library.Application_BorrowBookResult.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Results.CreateSiteResult", "rp": "Library.Application_CreateSiteResult.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Results.RegisterBookResult", "rp": "Library.Application_RegisterBookResult.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Results.RegisterUserResult", "rp": "Library.Application_RegisterUserResult.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Results.RequestTransferResult", "rp": "Library.Application_RequestTransferResult.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Application.Results.ReturnBookResult", "rp": "Library.Application_ReturnBookResult.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "Library.Domain",
     "classes": [
-      { "name": "Library.Domain.BookCopy", "rp": "Library.Domain_BookCopy.html", "cl": 30, "ucl": 5, "cal": 35, "tl": 57, "cb": 6, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.BorrowingService", "rp": "Library.Domain_BorrowingService.html", "cl": 20, "ucl": 0, "cal": 20, "tl": 38, "cb": 10, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.BorrowResult", "rp": "Library.Domain_BorrowResult.html", "cl": 13, "ucl": 0, "cal": 13, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Entities.Book", "rp": "Library.Domain_Book.html", "cl": 34, "ucl": 6, "cal": 40, "tl": 64, "cb": 12, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Entities.BookCopy", "rp": "Library.Domain_BookCopy.2.html", "cl": 86, "ucl": 6, "cal": 92, "tl": 152, "cb": 32, "tb": 32, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Entities.Loan", "rp": "Library.Domain_Loan.html", "cl": 80, "ucl": 6, "cal": 86, "tl": 134, "cb": 20, "tb": 20, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Entities.Site", "rp": "Library.Domain_Site.html", "cl": 22, "ucl": 6, "cal": 28, "tl": 46, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Entities.UserAccount", "rp": "Library.Domain_UserAccount.html", "cl": 40, "ucl": 6, "cal": 46, "tl": 78, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Loan", "rp": "Library.Domain_Loan.2.html", "cl": 43, "ucl": 4, "cal": 47, "tl": 63, "cb": 10, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.PenaltyService", "rp": "Library.Domain_PenaltyService.html", "cl": 14, "ucl": 0, "cal": 14, "tl": 29, "cb": 6, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Results.BorrowResult", "rp": "Library.Domain_BorrowResult.2.html", "cl": 22, "ucl": 0, "cal": 22, "tl": 46, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.ReturnService", "rp": "Library.Domain_ReturnService.html", "cl": 13, "ucl": 0, "cal": 13, "tl": 31, "cb": 5, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Services.BorrowingService", "rp": "Library.Domain_BorrowingService.2.html", "cl": 34, "ucl": 0, "cal": 34, "tl": 82, "cb": 20, "tb": 20, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Services.PenaltyService", "rp": "Library.Domain_PenaltyService.2.html", "cl": 28, "ucl": 0, "cal": 28, "tl": 61, "cb": 12, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.Services.ReturnService", "rp": "Library.Domain_ReturnService.2.html", "cl": 26, "ucl": 0, "cal": 26, "tl": 64, "cb": 14, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Library.Domain.UserAccount", "rp": "Library.Domain_UserAccount.2.html", "cl": 22, "ucl": 2, "cal": 24, "tl": 42, "cb": 4, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Entities.Book", "rp": "Library.Domain_Book.html", "cl": 17, "ucl": 3, "cal": 20, "tl": 32, "cb": 6, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Entities.BookCopy", "rp": "Library.Domain_BookCopy.html", "cl": 43, "ucl": 3, "cal": 46, "tl": 76, "cb": 16, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Entities.Loan", "rp": "Library.Domain_Loan.html", "cl": 40, "ucl": 3, "cal": 43, "tl": 67, "cb": 10, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Entities.Site", "rp": "Library.Domain_Site.html", "cl": 11, "ucl": 3, "cal": 14, "tl": 23, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Entities.UserAccount", "rp": "Library.Domain_UserAccount.html", "cl": 20, "ucl": 3, "cal": 23, "tl": 39, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Results.BorrowResult", "rp": "Library.Domain_BorrowResult.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Services.BorrowingService", "rp": "Library.Domain_BorrowingService.html", "cl": 17, "ucl": 0, "cal": 17, "tl": 41, "cb": 10, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Services.PenaltyService", "rp": "Library.Domain_PenaltyService.html", "cl": 14, "ucl": 0, "cal": 14, "tl": 31, "cb": 6, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Library.Domain.Services.ReturnService", "rp": "Library.Domain_ReturnService.html", "cl": 13, "ucl": 0, "cal": 13, "tl": 32, "cb": 7, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -277,13 +261,7 @@ var riskHotspotMetrics = [
 
 var riskHotspots = [
   {
-    "assembly": "Library.Application", "class": "Library.Application.Handlers.BorrowBookHandler", "reportPath": "Library.Application_BorrowBookHandler.2.html", "methodName": "Handle(Library.Application.Commands.BorrowBookCommand)", "methodShortName": "Handle(...)", "fileIndex": 0, "line": 32,
-    "metrics": [
-      { "value": 110, "exceeded": true },
-      { "value": 10, "exceeded": false },
-    ]},
-  {
-    "assembly": "Library.Application", "class": "Library.Application.Handlers.BorrowBookHandler", "reportPath": "Library.Application_BorrowBookHandler.2.html", "methodName": "Handle(Library.Application.Commands.BorrowBookCommand)", "methodShortName": "Handle(...)", "fileIndex": 1, "line": 32,
+    "assembly": "Library.Application", "class": "Library.Application.Handlers.BorrowBookHandler", "reportPath": "Library.Application_BorrowBookHandler.html", "methodName": "Handle(Library.Application.Commands.BorrowBookCommand)", "methodShortName": "Handle(...)", "fileIndex": 0, "line": 32,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
@@ -295,31 +273,13 @@ var riskHotspots = [
       { "value": 10, "exceeded": false },
     ]},
   {
-    "assembly": "Library.Application", "class": "Library.Application.Handlers.ReturnBookHandler", "reportPath": "Library.Application_ReturnBookHandler.html", "methodName": ".ctor(Library.Application.Repositories.IUserRepository,Library.Application.Repositories.IBookCopyRepository,Library.Application.Repositories.ILoanRepository,Library.Application.IClock,Library.Domain.Services.ReturnService)", "methodShortName": ".ctor(...)", "fileIndex": 1, "line": 19,
-    "metrics": [
-      { "value": 110, "exceeded": true },
-      { "value": 10, "exceeded": false },
-    ]},
-  {
     "assembly": "Library.Application", "class": "Library.Application.Handlers.RegisterBookHandler", "reportPath": "Library.Application_RegisterBookHandler.html", "methodName": "Handle(Library.Application.Commands.RegisterBookCommand)", "methodShortName": "Handle(...)", "fileIndex": 0, "line": 20,
     "metrics": [
       { "value": 72, "exceeded": true },
       { "value": 8, "exceeded": false },
     ]},
   {
-    "assembly": "Library.Application", "class": "Library.Application.Handlers.RegisterBookHandler", "reportPath": "Library.Application_RegisterBookHandler.html", "methodName": "Handle(Library.Application.Commands.RegisterBookCommand)", "methodShortName": "Handle(...)", "fileIndex": 1, "line": 20,
-    "metrics": [
-      { "value": 72, "exceeded": true },
-      { "value": 8, "exceeded": false },
-    ]},
-  {
     "assembly": "Library.Application", "class": "Library.Application.Handlers.ReturnBookHandler", "reportPath": "Library.Application_ReturnBookHandler.html", "methodName": "Handle(Library.Application.Commands.ReturnBookCommand)", "methodShortName": "Handle(...)", "fileIndex": 0, "line": 34,
-    "metrics": [
-      { "value": 72, "exceeded": true },
-      { "value": 8, "exceeded": false },
-    ]},
-  {
-    "assembly": "Library.Application", "class": "Library.Application.Handlers.ReturnBookHandler", "reportPath": "Library.Application_ReturnBookHandler.html", "methodName": "Handle(Library.Application.Commands.ReturnBookCommand)", "methodShortName": "Handle(...)", "fileIndex": 1, "line": 34,
     "metrics": [
       { "value": 72, "exceeded": true },
       { "value": 8, "exceeded": false },
@@ -337,25 +297,7 @@ var riskHotspots = [
       { "value": 6, "exceeded": false },
     ]},
   {
-    "assembly": "Library.Application", "class": "Library.Application.Handlers.AddBookCopyHandler", "reportPath": "Library.Application_AddBookCopyHandler.html", "methodName": "Handle(Library.Application.Commands.AddBookCopyCommand)", "methodShortName": "Handle(...)", "fileIndex": 1, "line": 27,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "Library.Application", "class": "Library.Application.Handlers.AddBookCopyHandler", "reportPath": "Library.Application_AddBookCopyHandler.html", "methodName": ".ctor(Library.Application.Repositories.IBookRepository,Library.Application.Repositories.ISiteRepository,Library.Application.Repositories.IBookCopyRepository)", "methodShortName": ".ctor(...)", "fileIndex": 1, "line": 16,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
     "assembly": "Library.Application", "class": "Library.Application.Handlers.RequestTransferHandler", "reportPath": "Library.Application_RequestTransferHandler.html", "methodName": "Handle(Library.Application.Commands.RequestTransferCommand)", "methodShortName": "Handle(...)", "fileIndex": 0, "line": 19,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "Library.Application", "class": "Library.Application.Handlers.RequestTransferHandler", "reportPath": "Library.Application_RequestTransferHandler.html", "methodName": "Handle(Library.Application.Commands.RequestTransferCommand)", "methodShortName": "Handle(...)", "fileIndex": 1, "line": 19,
     "metrics": [
       { "value": 42, "exceeded": true },
       { "value": 6, "exceeded": false },
