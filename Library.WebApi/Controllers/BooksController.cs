@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
-using Library.Application;
+using Library.Application.Commands;
+using Library.Application.Handlers;
+using Library.Application.Repositories;
 using Library.Domain;
+using Library.Domain.Entities;
 using Library.WebApi.Models;
-using Library.WebApi.Views.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -143,7 +145,7 @@ public class BooksController : Controller
 
         return View(vm);
     }
-
+[HttpGet]
 
     [HttpPost]
     [ValidateAntiForgeryToken]

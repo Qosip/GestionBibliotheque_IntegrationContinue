@@ -1,56 +1,83 @@
 ﻿using System;
 using Library.Domain;
+using Library.Domain.Entities;
 using Xunit;
 
-namespace Library.Tests;
+namespace Library.Tests.Domain;
 
-public class BookTests
+/// <summary>
+/// Tests métier pour l’entité Book.
+/// Couvre :
+/// - invariants sur ISBN / Titre / Auteur,
+/// - nettoyage des données entrantes,
+/// - stabilité de l’identité.
+/// </summary>
+public sealed class BookTests
 {
+    // ------------------------------------------------------------
+    // 1) Invariants – paramètres obligatoires
+    // ------------------------------------------------------------
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Ctor_Should_Throw_When_Isbn_Invalid(string? isbn)
+    {
+        Assert.Throws<ArgumentException>(() =>
+            new Book(Guid.NewGuid(), isbn!, "Title", "Author"));
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Ctor_Should_Throw_When_Title_Invalid(string? title)
+    {
+        Assert.Throws<ArgumentException>(() =>
+            new Book(Guid.NewGuid(), "ISBN", title!, "Author"));
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Ctor_Should_Throw_When_Author_Invalid(string? author)
+    {
+        Assert.Throws<ArgumentException>(() =>
+            new Book(Guid.NewGuid(), "ISBN", "Title", author!));
+    }
+
+    // ------------------------------------------------------------
+    // 2) Nettoyage – trimming automatique
+    // ------------------------------------------------------------
+
     [Fact]
-    public void Can_create_book_with_valid_data()
+    public void Ctor_Should_Trim_Fields()
     {
-        // Arrange
+        var book = new Book(
+            Guid.NewGuid(),
+            " 978-1111111111 ",
+            "  Le Titre  ",
+            "  L’Auteur "
+        );
+
+        Assert.Equal("978-1111111111", book.Isbn);
+        Assert.Equal("Le Titre", book.Title);
+        Assert.Equal("L’Auteur", book.Author);
+    }
+
+    // ------------------------------------------------------------
+    // 3) Intégrité de l’identité
+    // ------------------------------------------------------------
+
+    [Fact]
+    public void Ctor_Should_Set_Id_Exactly_As_Provided()
+    {
         var id = Guid.NewGuid();
 
-        // Act
-        var book = new Book(id, "9781234567890", "Clean Code", "Robert C. Martin");
+        var book = new Book(id, "ISBN", "Title", "Author");
 
-        // Assert
         Assert.Equal(id, book.Id);
-        Assert.Equal("9781234567890", book.Isbn);
-        Assert.Equal("Clean Code", book.Title);
-        Assert.Equal("Robert C. Martin", book.Author);
-    }
-
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData("  ")]
-    public void Constructor_throws_when_title_is_null_or_whitespace(string? title)
-    {
-        // Arrange
-        var id = Guid.NewGuid();
-
-        // Act + Assert
-        Assert.Throws<ArgumentException>(() =>
-        {
-            _ = new Book(id, "9781234567890", title!, "Author");
-        });
-    }
-
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData("  ")]
-    public void Constructor_throws_when_isbn_is_null_or_whitespace(string? isbn)
-    {
-        // Arrange
-        var id = Guid.NewGuid();
-
-        // Act + Assert
-        Assert.Throws<ArgumentException>(() =>
-        {
-            _ = new Book(id, isbn!, "Title", "Author");
-        });
     }
 }

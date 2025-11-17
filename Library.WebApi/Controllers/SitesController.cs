@@ -1,7 +1,8 @@
 using System;
 using System.Linq;
-using Library.Application;
-using Library.Domain;
+using Library.Application.Commands;
+using Library.Application.Handlers;
+using Library.Domain.Enums;
 using Library.Infrastructure;
 using Library.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;

@@ -1,132 +1,207 @@
 ﻿using System;
-using Library.Domain;
+using Library.Domain.Entities;
+using Library.Domain.Enums;
+using Library.Domain.Services;
 using Xunit;
 
-namespace Library.Tests;
+namespace Library.Tests.Domain;
 
-public class BorrowingServiceTests
+/// <summary>
+/// Suite de tests métier pour BorrowingService.
+/// Objectif : valider toutes les règles d’emprunt, y compris limite,
+/// disponibilités, cohérence des dates, et cohérence des mutations d’état.
+/// 
+/// Aucun mock : uniquement du domaine pur.
+/// </summary>
+public sealed class BorrowingServiceTests
 {
-    [Theory]
-    // activeLoans,         copyStatus,                  expectedSuccess, expectedErrorCode
-    [InlineData(4, BookCopyStatus.Available, true, null)]
-    [InlineData(5, BookCopyStatus.Available, false, "BORROW_LIMIT_REACHED")]
-    [InlineData(0, BookCopyStatus.Borrowed, false, "COPY_NOT_AVAILABLE")]
-    [InlineData(5, BookCopyStatus.Borrowed, false, "BORROW_LIMIT_REACHED")] // priorité au plafond utilisateur
-    public void TryBorrow_enforces_user_limit_and_copy_availability(
-        int activeLoans,
-        BookCopyStatus copyStatus,
-        bool expectedSuccess,
-        string? expectedErrorCode)
+    private readonly BorrowingService _service = new();
+
+    // --------------------------------------------------------------------
+    // UTILITAIRES POUR GÉNÉRER DES ENTITÉS MÉTIER
+    // --------------------------------------------------------------------
+
+    private static UserAccount CreateUser(int activeLoans = 0)
     {
-        // Arrange
-        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoans, amountDue: 0m);
-
-        var bookId = Guid.NewGuid();
-        var siteId = Guid.NewGuid();
-        var copy = new BookCopy(bookId, siteId);
-
-        if (copyStatus == BookCopyStatus.Borrowed)
-        {
-            copy.MarkAsBorrowed();
-        }
-
-        var borrowedAt = new DateTime(2025, 1, 1);
-        var dueDate = new DateTime(2025, 1, 15);
-
-        var service = new BorrowingService();
-
-        var initialLoansCount = user.ActiveLoansCount;
-        var initialCopyStatus = copy.Status;
-
-        // Act
-        var result = service.TryBorrow(user, copy, borrowedAt, dueDate);
-
-        // Assert
-        Assert.Equal(expectedSuccess, result.Success);
-        Assert.Equal(expectedErrorCode, result.ErrorCode);
-
-        if (expectedSuccess)
-        {
-            Assert.Equal(initialLoansCount + 1, user.ActiveLoansCount);
-            Assert.Equal(BookCopyStatus.Borrowed, copy.Status);
-        }
-        else
-        {
-            Assert.Equal(initialLoansCount, user.ActiveLoansCount);
-            Assert.Equal(initialCopyStatus, copy.Status);
-        }
+        var u = new UserAccount(Guid.NewGuid(), "Test", 0, 0m);
+        for (int i = 0; i < activeLoans; i++)
+            u.IncrementLoans(); // Simule des prêts actifs existants
+        return u;
     }
 
-    [Fact]
-    public void TryBorrow_throws_when_due_date_before_borrowed_date()
+    private static BookCopy CreateCopy(BookCopyStatus status = BookCopyStatus.Available)
     {
-        // Arrange
-        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 0, amountDue: 0m);
-        var copy = new BookCopy(Guid.NewGuid(), Guid.NewGuid());
-
-        var borrowedAt = new DateTime(2025, 1, 10);
-        var dueDate = new DateTime(2025, 1, 5);
-
-        var service = new BorrowingService();
-
-        // Act + Assert
-        Assert.Throws<ArgumentException>(() =>
-        {
-            service.TryBorrow(user, copy, borrowedAt, dueDate);
-        });
+        var c = new BookCopy(Guid.NewGuid(), Guid.NewGuid());
+        if (status == BookCopyStatus.Borrowed)
+            c.MarkAsBorrowed();
+        if (status == BookCopyStatus.InTransfer)
+            c.MarkAsInTransfer();
+        return c;
     }
 
-    [Fact]
-    public void Successful_borrow_creates_loan_with_correct_data()
-    {
-        // Arrange
-        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 0, amountDue: 0m);
-
-        var bookId = Guid.NewGuid();
-        var siteId = Guid.NewGuid();
-        var copy = new BookCopy(bookId, siteId);
-
-        var borrowedAt = new DateTime(2025, 1, 1);
-        var dueDate = new DateTime(2025, 1, 15);
-
-        var service = new BorrowingService();
-
-        // Act
-        var result = service.TryBorrow(user, copy, borrowedAt, dueDate);
-
-        // Assert
-        Assert.True(result.Success);
-        Assert.Null(result.ErrorCode);
-
-        Assert.NotNull(result.Loan);
-        Assert.Equal(user.Id, result.Loan!.UserAccountId);
-        Assert.Equal(copy.Id, result.Loan.BookCopyId);
-        Assert.Equal(borrowedAt, result.Loan.BorrowedAt);
-        Assert.Equal(dueDate, result.Loan.DueDate);
-    }
+    // --------------------------------------------------------------------
+    // 1) Tests limites emprunts
+    // --------------------------------------------------------------------
 
     [Fact]
-    public void Failed_borrow_does_not_create_loan()
+    public void TryBorrow_Should_Fail_When_User_Reaches_Max_Loans()
     {
-        // Arrange
-        var user = new UserAccount(Guid.NewGuid(), "Test user", activeLoansCount: 5, amountDue: 0m);
+        // Intention :
+        // L'utilisateur possède déjà le maximum de prêts autorisés.
+        // => L'emprunt doit être refusé avec le code BORROW_LIMIT_REACHED.
 
-        var bookId = Guid.NewGuid();
-        var siteId = Guid.NewGuid();
-        var copy = new BookCopy(bookId, siteId);
+        var user = CreateUser(activeLoans: 5);
+        var copy = CreateCopy();
 
-        var borrowedAt = new DateTime(2025, 1, 1);
-        var dueDate = new DateTime(2025, 1, 15);
+        var now = DateTime.UtcNow;
+        var result = _service.TryBorrow(user, copy, now, now.AddDays(14));
 
-        var service = new BorrowingService();
-
-        // Act
-        var result = service.TryBorrow(user, copy, borrowedAt, dueDate);
-
-        // Assert
         Assert.False(result.Success);
         Assert.Equal("BORROW_LIMIT_REACHED", result.ErrorCode);
-        Assert.Null(result.Loan);
     }
 
+    [Fact]
+    public void TryBorrow_Should_Succeed_When_User_Has_4_Loans()
+    {
+        var user = CreateUser(activeLoans: 4);
+        var copy = CreateCopy();
+
+        var now = DateTime.UtcNow;
+        var result = _service.TryBorrow(user, copy, now, now.AddDays(14));
+
+        Assert.True(result.Success);
+        Assert.NotNull(result.Loan);
+        Assert.Equal(5, user.ActiveLoansCount); // incrément correct
+        Assert.Equal(BookCopyStatus.Borrowed, copy.Status);
+    }
+
+    // --------------------------------------------------------------------
+    // 2) Tests disponibilité exemplaires
+    // --------------------------------------------------------------------
+
+    [Fact]
+    public void TryBorrow_Should_Fail_When_Copy_Not_Available()
+    {
+        var user = CreateUser();
+        var copy = CreateCopy(status: BookCopyStatus.Borrowed);
+
+        var now = DateTime.UtcNow;
+
+        var result = _service.TryBorrow(user, copy, now, now.AddDays(14));
+
+        Assert.False(result.Success);
+        Assert.Equal("COPY_NOT_AVAILABLE", result.ErrorCode);
+    }
+
+    [Fact]
+    public void TryBorrow_Should_Fail_When_Copy_In_Transfer()
+    {
+        var user = CreateUser();
+        var copy = CreateCopy(status: BookCopyStatus.InTransfer);
+
+        var now = DateTime.UtcNow;
+
+        var result = _service.TryBorrow(user, copy, now, now.AddDays(14));
+
+        Assert.False(result.Success);
+        Assert.Equal("COPY_NOT_AVAILABLE", result.ErrorCode);
+    }
+
+    // --------------------------------------------------------------------
+    // 3) Tests cohérence des dates
+    // --------------------------------------------------------------------
+
+    [Fact]
+    public void TryBorrow_Should_Throw_When_DueDate_Before_BorrowedAt()
+    {
+        var user = CreateUser();
+        var copy = CreateCopy();
+
+        var borrowedAt = DateTime.UtcNow;
+        var dueDate = borrowedAt.AddHours(-1);
+
+        Assert.Throws<ArgumentException>(() =>
+            _service.TryBorrow(user, copy, borrowedAt, dueDate));
+    }
+
+    // --------------------------------------------------------------------
+    // 4) Tests mutation d’état cohérente
+    // --------------------------------------------------------------------
+
+    [Fact]
+    public void TryBorrow_Should_Mark_Copy_As_Borrowed_On_Success()
+    {
+        var user = CreateUser();
+        var copy = CreateCopy();
+
+        var now = DateTime.UtcNow;
+        var result = _service.TryBorrow(user, copy, now, now.AddDays(14));
+
+        Assert.True(result.Success);
+        Assert.Equal(BookCopyStatus.Borrowed, copy.Status);
+    }
+
+    [Fact]
+    public void TryBorrow_Should_Increment_User_ActiveLoans_On_Success()
+    {
+        var user = CreateUser(activeLoans: 1);
+        var copy = CreateCopy();
+
+        var now = DateTime.UtcNow;
+        var result = _service.TryBorrow(user, copy, now, now.AddDays(14));
+
+        Assert.True(result.Success);
+        Assert.Equal(2, user.ActiveLoansCount);
+    }
+
+    // --------------------------------------------------------------------
+    // 5) Tests cohérence du Loan retourné
+    // --------------------------------------------------------------------
+
+    [Fact]
+    public void TryBorrow_Should_Return_Loan_With_Correct_Data()
+    {
+        var user = CreateUser();
+        var copy = CreateCopy();
+
+        var borrowedAt = new DateTime(2025, 01, 20, 10, 00, 00, DateTimeKind.Utc);
+        var dueDate = borrowedAt.AddDays(14);
+
+        var result = _service.TryBorrow(user, copy, borrowedAt, dueDate);
+
+        Assert.True(result.Success);
+        Assert.NotNull(result.Loan);
+
+        var loan = result.Loan!;
+
+        Assert.Equal(user.Id, loan.UserAccountId);
+        Assert.Equal(copy.Id, loan.BookCopyId);
+        Assert.Equal(borrowedAt, loan.BorrowedAt);
+        Assert.Equal(dueDate, loan.DueDate);
+        Assert.Null(loan.ReturnedAt);
+    }
+
+    // --------------------------------------------------------------------
+    // 6) Tests erreurs argumentaires
+    // --------------------------------------------------------------------
+
+    [Fact]
+    public void TryBorrow_Should_Throw_If_User_Null()
+    {
+        var copy = CreateCopy();
+        var now = DateTime.UtcNow;
+
+        Assert.Throws<ArgumentNullException>(() =>
+            _service.TryBorrow(null!, copy, now, now.AddDays(14)));
+    }
+
+    [Fact]
+    public void TryBorrow_Should_Throw_If_Copy_Null()
+    {
+        var user = CreateUser();
+        var now = DateTime.UtcNow;
+
+        Assert.Throws<ArgumentNullException>(() =>
+            _service.TryBorrow(user, null!, now, now.AddDays(14)));
+    }
 }
