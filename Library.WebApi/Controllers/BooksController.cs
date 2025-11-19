@@ -145,7 +145,7 @@ public class BooksController : Controller
 
         return View(vm);
     }
-[HttpGet]
+    [HttpGet]
 
     [HttpPost]
     [ValidateAntiForgeryToken]

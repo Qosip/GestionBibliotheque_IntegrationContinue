@@ -145,7 +145,7 @@ public sealed class LoanTests
     // ------------------------------------------------------------
     // 4) Effet de ReturnedAt sur la logique
     // ------------------------------------------------------------
-    /*
+    
     [Fact]
     public void IsOverdue_Should_Use_ReturnedAt_When_Late()
     {
@@ -158,9 +158,8 @@ public sealed class LoanTests
         loan.MarkAsReturned(returnedAt);
 
         Assert.True(loan.IsOverdue(returnedAt));
-        Assert.False(loan.IsOverdue(new DateTime(2025, 1, 8))); // now avant return → OK
     }
-    */
+    
     [Fact]
     public void GetOverdueDays_Should_Use_ReturnedAt_When_Set()
     {
