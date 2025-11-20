@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.WebApi", "Library.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Infrastructure", "Library.Infrastructure\Library.Infrastructure.csproj", "{C715B566-9B3F-4C1F-A9CD-CE0CFD835824}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunCoverage", "RunCoverage\RunCoverage.csproj", "{DCF04F1C-9854-4685-BC3D-0DA18B527A34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{C715B566-9B3F-4C1F-A9CD-CE0CFD835824}.Release|x64.Build.0 = Release|Any CPU
 		{C715B566-9B3F-4C1F-A9CD-CE0CFD835824}.Release|x86.ActiveCfg = Release|Any CPU
 		{C715B566-9B3F-4C1F-A9CD-CE0CFD835824}.Release|x86.Build.0 = Release|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Debug|x64.Build.0 = Debug|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Debug|x86.Build.0 = Debug|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Release|x64.ActiveCfg = Release|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Release|x64.Build.0 = Release|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Release|x86.ActiveCfg = Release|Any CPU
+		{DCF04F1C-9854-4685-BC3D-0DA18B527A34}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

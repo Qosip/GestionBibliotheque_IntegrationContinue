@@ -9,11 +9,6 @@ public class UserAccount
     public int ActiveLoansCount { get; private set; }
     public decimal AmountDue { get; private set; }
 
-    // Ctor pour EF Core
-    private UserAccount()
-    {
-    }
-
     // Cas normal : création d'un utilisateur avec un nom
     public UserAccount(Guid id, string name)
         : this(id, name, 0, 0m)

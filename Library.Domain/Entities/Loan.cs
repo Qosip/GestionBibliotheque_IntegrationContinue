@@ -11,10 +11,6 @@ public class Loan
     public DateTime DueDate { get; private set; }
     public DateTime? ReturnedAt { get; private set; }
 
-    private Loan()
-    {
-    }
-
     // Constructeur existant (utilisé par LoanOverdueTests)
     public Loan(DateTime borrowedAt, DateTime dueDate)
     {

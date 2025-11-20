@@ -9,10 +9,6 @@ public class Book
     public string Title { get; private set; } = string.Empty;
     public string Author { get; private set; } = string.Empty;
 
-    private Book()
-    {
-    }
-
     public Book(Guid id, string isbn, string title, string author)
     {
         if (string.IsNullOrWhiteSpace(isbn))

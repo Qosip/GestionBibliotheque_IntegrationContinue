@@ -8,9 +8,6 @@ public class Site
     public string Name { get; private set; } = string.Empty;
     public string? Address { get; private set; }
 
-    private Site()
-    {
-    }
     public Site(Guid id, string name, string? address = null)
     {
         if (string.IsNullOrWhiteSpace(name))

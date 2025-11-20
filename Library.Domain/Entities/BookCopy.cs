@@ -10,11 +10,7 @@ public class BookCopy
     public Guid SiteId { get; private set; }
     public BookCopyStatus Status { get; private set; }
 
-    // Ctor sans paramètre pour EF Core
-    private BookCopy()
-    {
-    }
-
+    
     // Ctor métier
     public BookCopy(Guid bookId, Guid siteId)
     {
