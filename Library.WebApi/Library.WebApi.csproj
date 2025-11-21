@@ -24,7 +24,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Loans\" />
-    <Folder Include="Views\Transfers\" />
   </ItemGroup>
 
 </Project>

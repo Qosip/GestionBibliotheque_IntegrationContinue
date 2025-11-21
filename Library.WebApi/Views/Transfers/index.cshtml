@@ -1,0 +1,49 @@
+﻿@using Library.Domain.Entities
+@using Library.Domain.Enums
+@model IEnumerable<BookCopy>
+
+@{
+    ViewData["Title"] = "Transferts en cours";
+}
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h2 class="mb-3">Transferts en cours</h2>
+
+        @if (!Model.Any())
+        {
+            <p>Aucun transfert en cours.</p>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Exemplaire</th>
+                        <th>Site actuel</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var copy in Model)
+                    {
+                        <tr>
+                            <td>@copy.Id</td>
+                            <td>@copy.SiteId</td>
+                            <td>
+                                <!-- Version bouton POST si tu préfères -->
+                                <form method="post" action="/Transfers/Receive" class="d-inline">
+                                    <input type="hidden" name="bookCopyId" value="@copy.Id" />
+                                    <input type="hidden" name="targetSiteId" value="@copy.SiteId" />
+                                    <button class="btn btn-success btn-sm">Marquer comme reçu</button>
+                                </form>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

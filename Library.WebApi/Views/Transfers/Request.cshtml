@@ -1,5 +1,5 @@
-@using Library.Application.Commands
-@model RequestTransferCommand
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model Library.WebApi.Models.TransferRequestViewModel
 
 @{
     ViewData["Title"] = "Demander un transfert";
@@ -10,7 +10,7 @@
         <h2 class="card-title mb-3">Demander un transfert d'exemplaire</h2>
 
         <p class="text-muted">
-            Renseigne le BookId, le site source et le site cible.
+            Sélectionnez le livre, le site source et le site cible.
         </p>
 
         @if (!ViewData.ModelState.IsValid)
@@ -25,25 +25,38 @@
 
         <form asp-action="Request" method="post">
             <div class="mb-3">
-                <label asp-for="BookId" class="form-label">BookId</label>
-                <input asp-for="BookId" class="form-control" />
+                <label asp-for="BookId" class="form-label">Livre</label>
+                <select asp-for="BookId" class="form-control" asp-items="Model.Books">
+                    <option value="">-- Sélectionner un livre --</option>
+                </select>
                 <span asp-validation-for="BookId" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
+                <label asp-for="Quantity" class="form-label">Nombre d'exemplaires</label>
+                <input asp-for="Quantity" type="number" min="1" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+
+            <div class="mb-3">
                 <label asp-for="SourceSiteId" class="form-label">Site source</label>
-                <input asp-for="SourceSiteId" class="form-control" />
+                <select asp-for="SourceSiteId" class="form-control" asp-items="Model.Sites">
+                    <option value="">-- Sélectionner un site source --</option>
+                </select>
                 <span asp-validation-for="SourceSiteId" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="TargetSiteId" class="form-label">Site cible</label>
-                <input asp-for="TargetSiteId" class="form-control" />
+                <select asp-for="TargetSiteId" class="form-control" asp-items="Model.Sites">
+                    <option value="">-- Sélectionner un site cible --</option>
+                </select>
                 <span asp-validation-for="TargetSiteId" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-primary">Demander le transfert</button>
-            <a href="/Home/Index" class="btn btn-link">Retour</a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-link">Retour</a>
         </form>
     </div>
 </div>

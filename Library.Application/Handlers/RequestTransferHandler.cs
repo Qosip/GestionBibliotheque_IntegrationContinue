@@ -19,13 +19,11 @@ public sealed class RequestTransferHandler
     {
         if (command is null) throw new ArgumentNullException(nameof(command));
 
-        // Nouvelle validation : on refuse si source et cible identiques
         if (command.SourceSiteId == command.TargetSiteId)
         {
             return RequestTransferResult.Fail("SOURCE_AND_TARGET_MUST_DIFFER");
         }
 
-        // Cherche une copie disponible sur le site source
         var copy = _bookCopyRepository.FindAvailableCopy(command.BookId, command.SourceSiteId);
         if (copy is null)
         {
@@ -34,6 +32,10 @@ public sealed class RequestTransferHandler
 
         copy.MarkAsInTransfer();
 
+        // PERSISTENCE MANQUANTE
+        _bookCopyRepository.Update(copy);
+
         return RequestTransferResult.Ok(copy.Id);
     }
+
 }

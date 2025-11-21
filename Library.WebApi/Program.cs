@@ -37,6 +37,7 @@ builder.Services.AddScoped<AddBookCopyHandler>();
 builder.Services.AddScoped<BorrowBookHandler>();
 builder.Services.AddScoped<ReturnBookHandler>();
 builder.Services.AddScoped<RequestTransferHandler>();
+builder.Services.AddScoped<ReceiveTransferHandler>();
 
 // === Swagger / OpenAPI pour l'API REST ===
 builder.Services.AddEndpointsApiExplorer();

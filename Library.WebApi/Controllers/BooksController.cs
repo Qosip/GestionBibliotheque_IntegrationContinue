@@ -135,6 +135,7 @@ public class BooksController : Controller
     // 2. Ajout manuel d’exemplaires supplémentaires
     // --------------------------------------------------------
 
+    // GET /Books/AddCopy?bookId=...
     [HttpGet]
     public IActionResult AddCopy(Guid? bookId)
     {
@@ -145,8 +146,8 @@ public class BooksController : Controller
 
         return View(vm);
     }
-    [HttpGet]
 
+    // POST /Books/AddCopy
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult AddCopy(AddBookCopyViewModel model)
@@ -165,6 +166,7 @@ public class BooksController : Controller
 
         return RedirectToAction(nameof(AddCopySuccess));
     }
+
 
     [HttpGet]
     public IActionResult AddCopySuccess()

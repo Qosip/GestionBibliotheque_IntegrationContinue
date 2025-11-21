@@ -1,5 +1,7 @@
 # GestionBibliotheque
 
+Repository GitHub : https://github.com/Qosip/GestionBibliotheque_IntegrationContinue
+
 Application de gestion de bibliothèque multi-sites basée sur .NET, structurée en couches Domain / Application / Infrastructure / Web, avec une suite de tests unitaires exhaustive et une intégration continue via Jenkins.
 
 ---

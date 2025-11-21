@@ -45,6 +45,7 @@ public class SitesController : Controller
             from copy in _db.BookCopies
             join book in _db.Books on copy.BookId equals book.Id
             where copy.SiteId == id
+                && copy.Status != BookCopyStatus.InTransfer
             select new { book.Id, book.Title, copy.Status };
 
         var grouped = query
@@ -73,7 +74,7 @@ public class SitesController : Controller
         return View(vm);
     }
 
-    // ===== Création de site (inchangé) =====
+    // ===== Création de site =====
 
     [HttpGet]
     public IActionResult Create()
